@@ -64,7 +64,7 @@ public class JadwalService {
     }
 
     public ResponseEntity<Object> getJadwalById(Long id) {
-        log.info("Find user detail by user id: {}", id);
+        log.info("Find jadwal detail by jadwal id: {}", id);
         Optional<Jadwal> jadwal = jadwalRepository.findOne(id);
         if(jadwal.isEmpty()) return ResponseUtil.build(AppConstant.ResponseCode.DATA_NOT_FOUND, null, HttpStatus.NOT_FOUND);
 
@@ -73,10 +73,10 @@ public class JadwalService {
 
     public ResponseEntity<Object> updateJadwal(Jadwal request, Long id) {
         try {
-            log.info("Update user: {}", request);
+            log.info("Update jadwal: {}", request);
             Optional<Jadwal> jadwal = jadwalRepository.findById(id);
             if (jadwal.isEmpty()) {
-                log.info("user not found");
+                log.info("Jadwal not found");
                 return ResponseUtil.build(AppConstant.ResponseCode.DATA_NOT_FOUND, null, HttpStatus.NOT_FOUND);
             }
 
@@ -88,7 +88,7 @@ public class JadwalService {
             jadwalRepository.save(jadwal.get());
             return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, jadwal.get(), HttpStatus.OK);
         } catch (Exception e) {
-            log.error("Get an error by update category, Error : {}",e.getMessage());
+            log.error("Get an error by update jadwal, Error : {}",e.getMessage());
             return ResponseUtil.build(AppConstant.ResponseCode.UNKNOWN_ERROR,null,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

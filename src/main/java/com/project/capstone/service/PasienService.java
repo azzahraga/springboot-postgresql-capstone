@@ -82,10 +82,10 @@ public class PasienService {
 
     public ResponseEntity<Object> updatePasien(Pasien request, Long id) {
         try {
-            log.info("Update user: {}", request);
+            log.info("Update pasien: {}", request);
             Optional<Pasien> pasien = pasienRepository.findById(id);
             if (pasien.isEmpty()) {
-                log.info("user not found");
+                log.info("pasien not found");
                 return ResponseUtil.build(AppConstant.ResponseCode.DATA_NOT_FOUND, null, HttpStatus.NOT_FOUND);
             }
 
@@ -98,7 +98,7 @@ public class PasienService {
             pasienRepository.save(pasien.get());
             return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, pasien.get(), HttpStatus.OK);
         } catch (Exception e) {
-            log.error("Get an error by update category, Error : {}",e.getMessage());
+            log.error("Get an error by update pasien, Error : {}",e.getMessage());
             return ResponseUtil.build(AppConstant.ResponseCode.UNKNOWN_ERROR,null,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
