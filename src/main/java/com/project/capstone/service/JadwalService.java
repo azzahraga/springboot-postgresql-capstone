@@ -40,15 +40,15 @@ public class JadwalService {
 
     public ResponseEntity<Object> save(JadwalRequest request){
         try{
-        log.info("Get Dokter: {}");
+        // log.info("Get Dokter: {}");
         Dokter dkt = dokterRepository.findById(request.getDokterId())
             .orElseThrow(()-> new Exception("Dokter Id "+ request.getDokterId() + "Not Found"));
 
-        log.info("Get Pasien: {}");
+        // log.info("Get Pasien: {}");
         Pasien pasien = pasienRepository.findById(request.getPasienId())
             .orElseThrow(()-> new Exception("Pasien Id "+ request.getDokterId() + "Not Found"));
 
-        log.info("Save new jadwal: {}");
+        log.info("Save new jadwal: {}",request);
         // Jadwal jadwal = new Jadwal();
 
         // jadwal.setDokter(dkt);

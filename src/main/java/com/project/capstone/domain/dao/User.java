@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -51,17 +52,20 @@ public class User extends BaseEntityWithDeletedAt{
     // @Column(name = "role", nullable = false)
     // private String role;
 
-    // @JsonIgnore
-    // @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userdokter")
-    // private List<Dokter> dokter;
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userdokter")
+    @JsonBackReference
+    private List<Dokter> dokter;
 
-    // @JsonIgnore
-    // @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userjadwal")
-    // private List<Jadwal> jadwal;
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userjadwal")
+    @JsonBackReference
+    private List<Jadwal> jadwal;
 
-    // @JsonIgnore
-    // @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userpasien")
-    // private List<Pasien> pasien;
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userpasien")
+    @JsonBackReference
+    private List<Pasien> pasien;
 
 
 }
