@@ -38,7 +38,7 @@ public class JadwalService {
         return ResponseEntity.ok().body(jadwalRepository.findAll());
     }
 
-    public Jadwal save(JadwalRequest request){
+    public ResponseEntity<Object> save(JadwalRequest request){
         try{
         log.info("Get Dokter: {}");
         Dokter dkt = dokterRepository.findById(request.getDokterId())
@@ -48,36 +48,38 @@ public class JadwalService {
         Pasien pasien = pasienRepository.findById(request.getPasienId())
             .orElseThrow(()-> new Exception("Pasien Id "+ request.getDokterId() + "Not Found"));
 
-        log.info("Save new jadwal: {}");
-        Jadwal jadwal = new Jadwal();
+        log.info("Save new jadwal: {}",request);
+        // Jadwal jadwal = new Jadwal();
 
-        jadwal.setDokter(dkt);
-        jadwal.setPasien(pasien);
-        jadwal.setNourut(request.getNourut());
-        jadwal.setJp(request.getJp());
-        jadwal.setTanggal(request.getTanggal());
-        jadwalRepository.save(jadwal);
-        return jadwal;
-        // return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, jadwal, HttpStatus.OK);
-        } catch (Exception e){
-            log.error("Post jadwal error");
-            throw new RuntimeException(e.getMessage(),e);
-            // return ResponseUtil.build(AppConstant.ResponseCode.UNKNOWN_ERROR, null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        // Jadwal jadwal = Jadwal.builder()
-        //     .
-        //     .nourut(request.getNourut())
-        //     .jp(request.getJp())
-        //     .tanggal(request.getTanggal())
-        //     // .status(request.getStatus())
-        //     .build();
-        // try {
-        //     jadwal = jadwalRepository.save(jadwal);
-        //     return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, jadwal, HttpStatus.OK);
-        // } catch (Exception e) {
-        //     return ResponseUtil.build(AppConstant.ResponseCode.UNKNOWN_ERROR, null, HttpStatus.INTERNAL_SERVER_ERROR);
+        // jadwal.setDokter(dkt);
+        // jadwal.setPasien(pasien);
+        // jadwal.setNourut(request.getNourut());
+        // jadwal.setJp(request.getJp());
+        // jadwal.setTanggal(request.getTanggal());
+        // jadwalRepository.save(jadwal);
+        // return jadwal;
+        // // return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, jadwal, HttpStatus.OK);
+        // } catch (Exception e){
+        //     log.error("Post jadwal error");
+        //     throw new RuntimeException(e.getMessage(),e);
+        //     // return ResponseUtil.build(AppConstant.ResponseCode.UNKNOWN_ERROR, null, HttpStatus.INTERNAL_SERVER_ERROR);
+        // }
+        Jadwal jadwal = Jadwal.builder()
+            .dokter(dkt)
+            .pasien(pasien)
+            .nourut(request.getNourut())
+            .jp(request.getJp())
+            .tanggal(request.getTanggal())
+            .build();
+        
+            jadwal = jadwalRepository.save(jadwal);
+            return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, jadwal, HttpStatus.OK);
+        } catch (Exception e) {
+            return ResponseUtil.build(AppConstant.ResponseCode.UNKNOWN_ERROR, null, HttpStatus.INTERNAL_SERVER_ERROR);
      
         }
+
+    }
     
 
     public ResponseEntity<Object> getJadwal(Long jadwalId) {

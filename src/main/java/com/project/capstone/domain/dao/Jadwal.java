@@ -40,12 +40,6 @@ public class Jadwal extends BaseEntityWithDeletedAt{
     @Column(name = "no_urut", nullable = false)
     private Integer nourut;
 
-    // @Column(name = "nama_pasien", nullable = false)
-    // private String namapasien;
-
-    // @Column(name = "nama_dokter", nullable = false)
-    // private String namadokter;
-
     @Column(name = "jenis_perawatan", nullable = false)
     private String jp;
 

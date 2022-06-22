@@ -26,8 +26,6 @@ public class JadwalRequest implements Serializable {
     private Long dokterId;
     private Long pasienId;
     private Integer nourut;
-    // private String namapasien;
-    // private String namadokter;
     private String jp;
     private Date tanggal;
 

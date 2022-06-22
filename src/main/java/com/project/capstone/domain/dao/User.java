@@ -51,17 +51,19 @@ public class User extends BaseEntityWithDeletedAt{
     // @Column(name = "role", nullable = false)
     // private String role;
 
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userdokter")
-    private List<Dokter> dokter;
+    // @JsonIgnore
+    // @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userdokter")
+    // private List<Dokter> dokter;
 
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userjadwal")
-    private List<Jadwal> jadwal;
+    // @JsonIgnore
+    // @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userjadwal")
+    // private List<Jadwal> jadwal;
 
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userpasien")
-    private List<Pasien> pasien;
+    // @JsonIgnore
+    // @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userpasien")
+    // private List<Pasien> pasien;
+
+    
 }
 //     public class User extends BaseEntityWithDeletedAt implements UserDetails{
     
