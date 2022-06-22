@@ -66,7 +66,7 @@ public class UserService {
         return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, user.get(), HttpStatus.OK);
     }
     public ResponseEntity<Object> deleteUser(Long Id) {
-        log.info("Find pasien by pasien id for delete: {}", Id);
+        log.info("Find user by user id for delete: {}", Id);
         try {
             userRepository.delete(Id);
         } catch (EmptyResultDataAccessException e) {

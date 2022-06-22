@@ -4,9 +4,13 @@ import java.util.Map;
 import java.util.Optional;
 
 import com.project.capstone.constant.AppConstant;
+import com.project.capstone.domain.dao.Dokter;
 import com.project.capstone.domain.dao.Jadwal;
+import com.project.capstone.domain.dao.Pasien;
 import com.project.capstone.domain.dto.JadwalRequest;
+import com.project.capstone.repository.DokterRepository;
 import com.project.capstone.repository.JadwalRepository;
+import com.project.capstone.repository.PasienRepository;
 import com.project.capstone.util.ResponseUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +24,8 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class JadwalService {
     private JadwalRepository jadwalRepository;
+    private DokterRepository dokterRepository;
+    private PasienRepository pasienRepository;
 
     @Autowired
     public JadwalService(JadwalRepository jadwalRepository) {
@@ -32,21 +38,45 @@ public class JadwalService {
         return ResponseEntity.ok().body(jadwalRepository.findAll());
     }
 
-    public ResponseEntity<Object> save(JadwalRequest request) {
-        log.info("Save new jadwal: {}", request);
-        Jadwal jadwal = Jadwal.builder()
-            .nourut(request.getNourut())
-            .jp(request.getJp())
-            .tanggal(request.getTanggal())
-            .status(request.getStatus())
-            .build();
-        try {
-            jadwal = jadwalRepository.save(jadwal);
-            return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, jadwal, HttpStatus.OK);
-        } catch (Exception e) {
+    public ResponseEntity<Object> save(JadwalRequest request){
+        try{
+        log.info("Get Dokter: {}");
+        Dokter dkt = dokterRepository.findById(request.getDokterId())
+            .orElseThrow(()-> new Exception("Dokter Id "+ request.getDokterId() + "Not Found"));
+
+        log.info("Get Pasien: {}");
+        Pasien pasien = pasienRepository.findById(request.getPasienId())
+            .orElseThrow(()-> new Exception("Pasien Id "+ request.getDokterId() + "Not Found"));
+
+        log.info("Save new jadwal: {}");
+        Jadwal jadwal = new Jadwal();
+
+        jadwal.setDokter(dkt);
+        jadwal.setPasien(pasien);
+        jadwal.setNourut(request.getNourut());
+        jadwal.setJp(request.getJp());
+        jadwal.setTanggal(request.getTanggal());
+        jadwalRepository.save(jadwal);
+        return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, jadwal, HttpStatus.OK);
+        } catch (Exception e){
+            log.error("Post jadwal error");
             return ResponseUtil.build(AppConstant.ResponseCode.UNKNOWN_ERROR, null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
+        // Jadwal jadwal = Jadwal.builder()
+        //     .
+        //     .nourut(request.getNourut())
+        //     .jp(request.getJp())
+        //     .tanggal(request.getTanggal())
+        //     // .status(request.getStatus())
+        //     .build();
+        // try {
+        //     jadwal = jadwalRepository.save(jadwal);
+        //     return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, jadwal, HttpStatus.OK);
+        // } catch (Exception e) {
+        //     return ResponseUtil.build(AppConstant.ResponseCode.UNKNOWN_ERROR, null, HttpStatus.INTERNAL_SERVER_ERROR);
+     
+        }
+    
 
     public ResponseEntity<Object> getJadwal(Long jadwalId) {
         return ResponseEntity.ok().body(jadwalRepository.findById(jadwalId));
@@ -83,7 +113,7 @@ public class JadwalService {
             jadwal.get().setNourut(request.getNourut());
             jadwal.get().setJp(request.getJp());
             jadwal.get().setTanggal(request.getTanggal());
-            jadwal.get().setStatus(request.getStatus());
+            // jadwal.get().setStatus(request.getStatus());
             // user.get().setRole(request.getRole());
             jadwalRepository.save(jadwal.get());
             return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, jadwal.get(), HttpStatus.OK);

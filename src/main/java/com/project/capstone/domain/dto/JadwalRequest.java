@@ -30,6 +30,5 @@ public class JadwalRequest implements Serializable {
     // private String namadokter;
     private String jp;
     private Date tanggal;
-    private String status;
 
 }

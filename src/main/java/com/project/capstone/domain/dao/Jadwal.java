@@ -52,9 +52,6 @@ public class Jadwal extends BaseEntityWithDeletedAt{
     @Column(name = "tanggal_kunjungan", nullable = false)
     private Date tanggal;
 
-    @Column(name = "status", nullable = false)
-    private String status;
-
     @ManyToOne
     @JoinColumn (name = "user_id", referencedColumnName = "id")
     private User userjadwal;
