@@ -35,7 +35,7 @@ public class JadwalController {
         return jadwalService.getJadwal(jadwalId);
     }
     @PostMapping(value = "")
-    public ResponseEntity<Object> createJadwal(@RequestBody JadwalRequest request) {
+    public Jadwal createJadwal(@RequestBody JadwalRequest request) {
         return jadwalService.save(request);
     }
 

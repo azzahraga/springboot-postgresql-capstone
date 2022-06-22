@@ -38,7 +38,7 @@ public class JadwalService {
         return ResponseEntity.ok().body(jadwalRepository.findAll());
     }
 
-    public ResponseEntity<Object> save(JadwalRequest request){
+    public Jadwal save(JadwalRequest request){
         try{
         log.info("Get Dokter: {}");
         Dokter dkt = dokterRepository.findById(request.getDokterId())
@@ -57,10 +57,12 @@ public class JadwalService {
         jadwal.setJp(request.getJp());
         jadwal.setTanggal(request.getTanggal());
         jadwalRepository.save(jadwal);
-        return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, jadwal, HttpStatus.OK);
+        return jadwal;
+        // return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, jadwal, HttpStatus.OK);
         } catch (Exception e){
             log.error("Post jadwal error");
-            return ResponseUtil.build(AppConstant.ResponseCode.UNKNOWN_ERROR, null, HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new RuntimeException(e.getMessage(),e);
+            // return ResponseUtil.build(AppConstant.ResponseCode.UNKNOWN_ERROR, null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         // Jadwal jadwal = Jadwal.builder()
         //     .
