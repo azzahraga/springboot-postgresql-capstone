@@ -63,7 +63,7 @@ public class User extends BaseEntityWithDeletedAt{
     // @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userpasien")
     // private List<Pasien> pasien;
 
-    
+
 }
 //     public class User extends BaseEntityWithDeletedAt implements UserDetails{
     

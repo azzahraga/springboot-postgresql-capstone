@@ -113,7 +113,8 @@ public class JadwalService {
                 log.info("Jadwal not found");
                 return ResponseUtil.build(AppConstant.ResponseCode.DATA_NOT_FOUND, null, HttpStatus.NOT_FOUND);
             }
-
+            jadwal.get().setDokter(request.getDokter());
+            jadwal.get().setPasien(request.getPasien());
             jadwal.get().setNourut(request.getNourut());
             jadwal.get().setJp(request.getJp());
             jadwal.get().setTanggal(request.getTanggal());
