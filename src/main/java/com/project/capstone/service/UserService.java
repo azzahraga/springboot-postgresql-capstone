@@ -8,7 +8,6 @@
 
 package com.project.capstone.service;
 
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +74,7 @@ public class UserService {
         }
         return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, null, HttpStatus.OK);
     }
+    
     public ResponseEntity<Object> updateUser(User request, Long id) {
         try {
             log.info("Update user: {}", request);

@@ -48,7 +48,7 @@ public class JadwalService {
         Pasien pasien = pasienRepository.findById(request.getPasienId())
             .orElseThrow(()-> new Exception("Pasien Id "+ request.getDokterId() + "Not Found"));
 
-        log.info("Save new jadwal: {}",request);
+        log.info("Save new jadwal: {}");
         // Jadwal jadwal = new Jadwal();
 
         // jadwal.setDokter(dkt);
