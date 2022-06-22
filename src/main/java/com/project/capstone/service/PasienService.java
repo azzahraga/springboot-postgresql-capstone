@@ -1,6 +1,5 @@
 package com.project.capstone.service;
 
-import java.util.Map;
 import java.util.Optional;
 
 import com.project.capstone.constant.AppConstant;
@@ -83,7 +82,7 @@ public class PasienService {
     public ResponseEntity<Object> updatePasien(Pasien request, Long id) {
         try {
             log.info("Update pasien: {}", request);
-            Optional<Pasien> pasien = pasienRepository.findById(id);
+            Optional<Pasien> pasien = pasienRepository.findOne(id);
             if (pasien.isEmpty()) {
                 log.info("pasien not found");
                 return ResponseUtil.build(AppConstant.ResponseCode.DATA_NOT_FOUND, null, HttpStatus.NOT_FOUND);

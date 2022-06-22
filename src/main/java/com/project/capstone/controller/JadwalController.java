@@ -31,8 +31,8 @@ public class JadwalController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Object> getJadwal(@PathVariable(value = "id") Long jadwalId) {
-        return jadwalService.getJadwal(jadwalId);
+    public ResponseEntity<Object> getJadwalById(@PathVariable(value = "id") Long jadwalId) {
+        return jadwalService.getJadwalById(jadwalId);
     }
     @PostMapping(value = "")
     public ResponseEntity<Object> createJadwal(@RequestBody JadwalRequest request) {

@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -20,16 +19,16 @@ import com.project.capstone.domain.dao.base.BaseEntityWithDeletedAt;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-//import lombok.EqualsAndHashCode;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-//import lombok.experimental.SuperBuilder;
+import lombok.experimental.SuperBuilder;
 
 // import org.springframework.security.core.GrantedAuthority;
 // import org.springframework.security.core.userdetails.UserDetails;
 
-//@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 @Data
-//@SuperBuilder
+@SuperBuilder
 @Builder
 @Entity
 @Table(name = "M_USER")
@@ -54,17 +53,14 @@ public class User extends BaseEntityWithDeletedAt{
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userdokter")
-    @JsonBackReference
     private List<Dokter> dokter;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userjadwal")
-    @JsonBackReference
     private List<Jadwal> jadwal;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userpasien")
-    @JsonBackReference
     private List<Pasien> pasien;
 
 

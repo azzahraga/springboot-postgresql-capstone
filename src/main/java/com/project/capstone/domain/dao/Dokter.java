@@ -14,9 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.project.capstone.domain.dao.base.BaseEntityWithDeletedAt;
@@ -60,12 +58,10 @@ public class Dokter extends BaseEntityWithDeletedAt{
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "dokter")
-    @JsonBackReference
     private List<Jadwal> jadwal;
     
     @ManyToOne
     @JoinColumn (name = "user_id", referencedColumnName = "id")
-    @JsonManagedReference
     private User userdokter;
 
 }

@@ -58,12 +58,13 @@ public class UserService {
     }
 
     public ResponseEntity<Object> getUserDetail(Long id) {
-        log.info("Find user detail by user id: {}", id);
-        Optional<User> user = userRepository.findById(id);
-        if(user.isEmpty()) return ResponseUtil.build(AppConstant.ResponseCode.DATA_NOT_FOUND, null, HttpStatus.NOT_FOUND);
+        log.info("Find user detail by user id: {}",id);
+        Optional<User> user = userRepository.findOne(id);
+        if (user.isEmpty()) return ResponseUtil.build(AppConstant.ResponseCode.DATA_NOT_FOUND, null, HttpStatus.NOT_FOUND);
 
         return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, user.get(), HttpStatus.OK);
     }
+
     public ResponseEntity<Object> deleteUser(Long Id) {
         log.info("Find user by user id for delete: {}", Id);
         try {
@@ -78,7 +79,7 @@ public class UserService {
     public ResponseEntity<Object> updateUser(User request, Long id) {
         try {
             log.info("Update user: {}", request);
-            Optional<User> user = userRepository.findById(id);
+            Optional<User> user = userRepository.findOne(id);
             if (user.isEmpty()) {
                 log.info("user not found");
                 return ResponseUtil.build(AppConstant.ResponseCode.DATA_NOT_FOUND, null, HttpStatus.NOT_FOUND);
